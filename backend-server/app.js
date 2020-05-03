@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use('/user-api/users', routes.user);
+app.use('/board-api/boards', routes.board);
 
 app.use((req, res, next) => {
     const error = new Error('Not found :(');
