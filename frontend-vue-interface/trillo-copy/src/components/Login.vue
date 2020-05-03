@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="userId === null">
         <b-jumbotron header="Welcome to my Trillo copy!" lead="Please login">
             <b-form-group
                 id="name-input"
@@ -24,7 +24,11 @@
             <b-button @click="handleLoginClick()" variant="primary">Login</b-button>
         </b-jumbotron>
     </div>
+    <div v-else>
+        This will be the main menu user id: {{ userId }}
+    </div>
 </template>
+
 
 <script>
 import UserStore from '../stores/UserStore.js'
@@ -59,6 +63,8 @@ export default {
 
             if (filteredUser.length === 1) {
                 console.log('user exists')
+                this.userId = filteredUser[0]._id
+                console.log(this.userId)
             } else {
                 console.log('user does not exist')
             }
