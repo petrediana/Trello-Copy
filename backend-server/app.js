@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./api/routes');
+const cors = require('cors');
 
 mongoose.connect('mongodb+srv://diana:'
 + process.env.MONGO_ATLAS_PW
@@ -13,6 +14,7 @@ mongoose.connect('mongodb+srv://diana:'
     useUnifiedTopology: true
 });
 
+app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
