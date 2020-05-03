@@ -24,7 +24,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.get('/:boardId', (req, res, next) => {
+router.get('/that-belong-to/:boardId', (req, res, next) => {
     const boardId = req.params.boardId;
 
     Board.find({ "boardId": boardId })
@@ -46,7 +46,7 @@ router.get('/:boardId', (req, res, next) => {
     });
 });
 
-router.get('/:noteListId', (req, res, next) => {
+router.get('/specific-noteList/:noteListId', (req, res, next) => {
     const noteListId = req.params.noteListId;
     NoteList.findById(noteListId)
     .exec()
