@@ -44,7 +44,7 @@ router.post('/', (req, res, next) => {
 
 router.get('/:userId', (req, res, next) => {
     const userId = req.params.userId;
-    
+
     Board.find({ "userId": userId })
     .select('_name description starred userId')
     .exec()
@@ -64,6 +64,43 @@ router.get('/:userId', (req, res, next) => {
     });
 });
 
+router.delete('/:boardId', (req, res, next) => {
+    const boardIdToRemove = req.params.boardId;
+    Board.remove({_id: boardIdToRemove})
+    .exec()
+    .then(result => {
+        res.status(200).json({
+            message: 'Board deleted!',
+            deletedBoardId: boardIdToRemove,
+            result: result
+        });
+    })
+    .catch(err => {
+        console.warn(err);
+        next(err);
+    })
+});
 
+router.patch('/:boardId', (req, res, next) => {
+    const boardIdToUpdate = req.params.boardId;
+    const updateOps = {}; 
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
+    
+    Board.updateOne({ _id: boardIdToUpdate }, { $set: updateOps })
+    .exec()
+    .then(result => {
+        res.status(200).json({
+            message: 'Board updated!',
+            updatedBoardId: boardIdToUpdate,
+            result: result
+        });
+    })
+    .catch(err => {
+        console.warn(err);
+        next(err);
+    });
+});
 
 module.exports = router;
