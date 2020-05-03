@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 app.use('/user-api/users', routes.user);
 app.use('/board-api/boards', routes.board);
 app.use('/notelist-api/notelists', routes.noteList);
+app.use('/note-api/notes', routes.note);
 
 app.use((req, res, next) => {
     const error = new Error('Not found :(');

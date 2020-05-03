@@ -4,7 +4,7 @@ const noteSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: { type: String, require: true },
     description: { type: String, default: '' },
-    conversationId: { type: mongoose.Schema.Types.ObjectId, ref: 'Conversation', require: true }
+    noteListId: { type: mongoose.Schema.Types.ObjectId, ref: 'NoteList', require: true }
 });
 
 module.exports = mongoose.model('Note', noteSchema);
