@@ -42,6 +42,28 @@ router.post('/', (req, res, next) => {
     }
 });
 
+router.get('/starred/:userId', (req, res, next) => {
+    const userId = req.params.userId;
+
+    Board.find({ "userId": userId, "starred": true })
+    .select('_name description starred userId')
+    .exec()
+    .then(docs => {
+        console.log('From db: ' + docs);  
+        if (docs.length > 0) {
+            res.status(200).json(docs);
+        } else {
+            res.status(404).json({
+                message : 'No data available'
+            });
+        }
+    })
+    .catch(err => {
+        console.warn(err);
+        next(err);
+    });
+})
+
 router.get('/:userId', (req, res, next) => {
     const userId = req.params.userId;
 
