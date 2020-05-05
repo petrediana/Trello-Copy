@@ -4,8 +4,16 @@
             <b-nav-item disabled><b>Trello copy :)</b></b-nav-item>
             <b-nav-item disabled>ToDo: maybe change this</b-nav-item>
             <b-nav-item disabled>Created by Petre Diana</b-nav-item>
-            <b-nav-item disabled>Logged as {{ this.userName }} </b-nav-item>
-            <b-nav-item @click="this.logout">Log out </b-nav-item>
+            
+            <b-navbar-nav class="ml-auto">
+                <b-nav-item-dropdown right>
+                <template v-slot:button-content>
+                    <em>Logged as: {{ currentUserName }}</em>
+                </template>
+                <b-dropdown-item href="#" @click="this.logout">Sign Out</b-dropdown-item>
+                </b-nav-item-dropdown>
+        </b-navbar-nav>                
+
         </b-nav>
 
     </div>
@@ -14,7 +22,7 @@
 <script>
 export default {
     props: {
-        userName: String,
+        currentUserName: String,
         logout: Function
     }
 }

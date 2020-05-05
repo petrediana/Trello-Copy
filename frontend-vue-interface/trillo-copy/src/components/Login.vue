@@ -26,7 +26,7 @@
     </div>
     <div v-else>
         <Header 
-            :userName="this.inputName"
+            :currentUserName="this.inputName"
             :logout="handleLogOut"
          />
         
