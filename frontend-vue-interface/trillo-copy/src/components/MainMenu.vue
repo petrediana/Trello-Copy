@@ -30,6 +30,7 @@
     <div v-else>
         <NoteList
             :currentBoardId="this.selectedBoardId"
+            :cancel="handleGoBack"
         />
     </div>
 </template>
@@ -72,6 +73,10 @@ export default {
         handleListItemClick(board) {
             this.selectedBoardId = board._id
             //console.log('click' + ' ' + board._id)
+        },
+
+        handleGoBack() {
+            this.selectedBoardId = null
         }
     }
 }

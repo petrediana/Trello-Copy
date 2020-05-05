@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div>
+             <b-link href="#" @click="handleGoBack()">Go back...</b-link>
+         </div>
         <b-card-group deck>
             <b-card
                 v-for="(noteList, index) in noteList"
@@ -20,7 +23,8 @@ import Notes from '../components/Notes'
 
 export default {
     props: {
-        currentBoardId: String
+        currentBoardId: String,
+        cancel: Function
     },
 
     components: {
@@ -38,6 +42,12 @@ export default {
         const noteListStore = new NoteListStore();
         noteListStore.getBoardNoteListsFromDb(this.currentBoardId)
         this.noteList = noteListStore.boardNoteListFromDb
+    },
+
+    methods: {
+        handleGoBack() {
+            this.cancel()
+        }
     }
 }
 </script>

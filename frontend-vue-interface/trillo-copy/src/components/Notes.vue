@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-list-group-item button variant="primary"
+        <b-list-group-item button variant="info"
         v-for="(note, index) in this.notes"
         :key="index"
         >

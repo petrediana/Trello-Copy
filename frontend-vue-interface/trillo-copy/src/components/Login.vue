@@ -30,6 +30,9 @@
             :currentUserId="this.userId"
             :currentUserName="this.inputName"
          />
+         <div>
+             <b-link href="#" @click="handleGoBack()">Log out </b-link>
+         </div>
     </div>
 </template>
 
@@ -77,6 +80,10 @@ export default {
             } else {
                 //console.log('user does not exist')
             }
+        },
+
+        handleGoBack() {
+            this.userId = null
         }
     }
 }
