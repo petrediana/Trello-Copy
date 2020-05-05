@@ -1,6 +1,6 @@
 <template>
     <div v-if="userId === null">
-        <b-jumbotron header="Welcome to my Trillo copy!" lead="Please login">
+        <b-jumbotron header="Welcome to my Trello copy!" lead="Please login">
             <b-form-group
                 id="name-input"
                 label-cols-sm="3"
