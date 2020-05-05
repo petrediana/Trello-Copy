@@ -22,7 +22,7 @@
 
 <script>
 import NoteListStore from '../stores/NoteListStore.js'
-import Notes from '../components/Notes'
+import Notes from '../components/Notes.vue'
 
 export default {
     props: {

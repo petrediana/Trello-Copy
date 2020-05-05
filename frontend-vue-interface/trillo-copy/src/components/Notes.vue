@@ -3,14 +3,18 @@
         <b-list-group-item button variant="info"
         v-for="(note, index) in this.notes"
         :key="index"
-        @focus="handleClick(note._id)"
-        @focusout="handleOutsideClick()"
+        @click="handleClick(note)"
+        
         >
             {{ note.name }}
         </b-list-group-item>
 
         <div v-if="isNoteClicked">
-            <Popup />
+            <p></p>
+            <Popup
+                :cancel="handleOutsideClick"
+                :noteName="this.noteName"
+            />
         </div>
     </div>
 
@@ -32,7 +36,8 @@ export default {
     data() {
         return {
             notes: [],
-            isNoteClicked: false
+            isNoteClicked: false,
+            noteName: ''
         }
     },
 
@@ -43,9 +48,9 @@ export default {
     },
 
     methods: {
-        handleClick(id) {
+        handleClick(note) {
             this.isNoteClicked = true
-            console.log(this.isNoteClicked + ' ' + id)
+            this.noteName = note.name
         },
 
         handleOutsideClick() {
