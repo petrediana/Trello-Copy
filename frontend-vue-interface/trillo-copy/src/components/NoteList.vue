@@ -12,17 +12,31 @@
                 <p class="card-text mt-2">
                     {{ currentBoardName }}:
                 </p>
+                <b-button-group size="sm">
+                    <b-button @click="handleClickAddNote" variant="success">Add Note</b-button>
+                    <b-button variant="danger">Delete notes</b-button>
+                </b-button-group>
+                <p></p> 
                 <b-list-group>
                     <Notes :currentNoteListId="noteList._id"/>
                 </b-list-group>
             </b-card>
         </b-card-group>
+
+        <div v-if="isAddingNotes">
+            adding note
+            <Popup
+                :cancel="handleDismiss"
+                :noteName="''"
+            />
+        </div>
     </div>
 </template>
 
 <script>
 import NoteListStore from '../stores/NoteListStore.js'
 import Notes from '../components/Notes.vue'
+import Popup from '../components/Popup.vue'
 
 export default {
     props: {
@@ -32,12 +46,14 @@ export default {
     },
 
     components: {
-        Notes
+        Notes,
+        Popup
     },
 
     data() {
         return {
-            noteList: []
+            noteList: [],
+            isAddingNotes: false
         }
     },
 
@@ -51,6 +67,14 @@ export default {
     methods: {
         handleGoBack() {
             this.cancel()
+        },
+
+        handleClickAddNote() {
+            this.isAddingNotes = true;
+        },
+
+        handleDismiss() {
+            this.isAddingNotes = false;
         }
     }
 }
