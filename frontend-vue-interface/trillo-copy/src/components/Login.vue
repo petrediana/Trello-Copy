@@ -26,14 +26,20 @@
     </div>
     <div v-else>
         This will be the main menu user id: {{ userId }}
+        <MainMenu />
     </div>
 </template>
 
 
 <script>
 import UserStore from '../stores/UserStore.js'
+import MainMenu from '../components/MainMenu.vue'
 
 export default {
+    components: {
+        MainMenu
+    },
+    
     data() {
         return {
             inputName: '',
