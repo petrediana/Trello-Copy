@@ -25,8 +25,11 @@
         </b-jumbotron>
     </div>
     <div v-else>
-        This will be the main menu user id: {{ userId }}
-        <MainMenu />
+        Hello there {{ this.inputName }}
+        <MainMenu
+            :currentUserId="this.userId"
+            :currentUserName="this.inputName"
+         />
     </div>
 </template>
 
@@ -39,7 +42,7 @@ export default {
     components: {
         MainMenu
     },
-    
+
     data() {
         return {
             inputName: '',
@@ -50,7 +53,7 @@ export default {
     },
 
     mounted() {
-        console.log('Login component mounted')
+        //console.log('Login component mounted')
         const userStore = new UserStore()
         userStore.getUsersFromDb()
         this.allUsers = userStore.usersFromDb
@@ -58,8 +61,8 @@ export default {
 
     methods: {
         handleLoginClick() {
-            console.log(this.allUsers.length)
-            console.log(this.inputName + ' ' + this.inputPass)
+            // console.log(this.allUsers.length)
+            // console.log(this.inputName + ' ' + this.inputPass)
 
             const filteredUser = this.allUsers.filter(user => {
                 if (user.name === this.inputName && user.pass === this.inputPass) {
@@ -68,11 +71,11 @@ export default {
             })
 
             if (filteredUser.length === 1) {
-                console.log('user exists')
+                //console.log('user exists')
                 this.userId = filteredUser[0]._id
-                console.log(this.userId)
+                //console.log(this.userId)
             } else {
-                console.log('user does not exist')
+                //console.log('user does not exist')
             }
         }
     }
