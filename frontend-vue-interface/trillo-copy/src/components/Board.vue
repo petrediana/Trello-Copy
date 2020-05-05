@@ -1,6 +1,8 @@
 <template>
-    <div>
-        {{ board }}
+    <div class="board-container">
+        
+        <p> {{ board.description }} </p>
+        
     </div>
 </template>
 
@@ -11,3 +13,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    .board-container {
+        padding: 0.8rem;
+        margin-right: 10px
+    }
+</style>

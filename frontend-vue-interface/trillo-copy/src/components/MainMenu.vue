@@ -1,19 +1,25 @@
 <template>
-    <div>
-        This is the main menu for {{ this.currentUserId }}
-
+    <div class="boards-container">
         <div>
             Starred
-            <p v-for="(starredUserBoard, index) in this.starredUserBoards" :key="index">
-                <Board :board="starredUserBoard"/>
-            </p>
+            <b-list-group horizontal>
+                <p v-for="(starredUserBoard, index) in this.starredUserBoards" :key="index">
+                    <b-list-group-item variant="primary">
+                        <Board :board="starredUserBoard"/>
+                    </b-list-group-item>
+                </p>
+            </b-list-group>
         </div>
         
-        <div>
+        <div class>
             All boards
-            <p v-for="(userBoard, index) in this.userBoards" :key="index">
-                <Board :board="userBoard"/>
-            </p>
+            <b-list-group horizontal>
+                <p v-for="(userBoard, index) in this.userBoards" :key="index">
+                    <b-list-group-item variant="primary">
+                        <Board :board="userBoard"/>
+                    </b-list-group-item>
+                </p>
+            </b-list-group>
         </div>
     </div>
 </template>
@@ -50,3 +56,7 @@ export default {
     }
 }
 </script>
+
+<style>
+
+</style>
