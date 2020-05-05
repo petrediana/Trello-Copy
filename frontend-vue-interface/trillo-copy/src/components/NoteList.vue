@@ -9,6 +9,9 @@
                 :key="index"
                 :header="noteList.name"
             >
+                <p class="card-text mt-2">
+                    {{ currentBoardName }}:
+                </p>
                 <b-list-group>
                     <Notes :currentNoteListId="noteList._id"/>
                 </b-list-group>
@@ -24,6 +27,7 @@ import Notes from '../components/Notes'
 export default {
     props: {
         currentBoardId: String,
+        currentBoardName: String,
         cancel: Function
     },
 
