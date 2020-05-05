@@ -2,11 +2,19 @@
     <div>
         This is the main menu for {{ this.currentUserId }}
 
-        All boards
-        <p v-for="(userBoard, index) in this.userBoards" :key="index">
-            {{ userBoard }}
-        </p>
-
+        <div>
+            Starred
+            <p v-for="(starredUserBoard, index) in this.starredUserBoards" :key="index">
+                {{ starredUserBoard }}
+            </p>
+        </div>
+        
+        <div>
+            All boards
+            <p v-for="(userBoard, index) in this.userBoards" :key="index">
+                {{ userBoard }}
+            </p>
+        </div>
     </div>
 </template>
 
@@ -31,6 +39,9 @@ export default {
         const boardStore = new BoardStore()
         boardStore.getAllBoardsForUser(this.currentUserId)
         this.userBoards = boardStore.userAllBoardsFromDb
+
+        boardStore.getAllStarredBoardsForUser(this.currentUserId)
+        this.starredUserBoards = boardStore.userAllStarredBoardsFromDb
     }
 }
 </script>
