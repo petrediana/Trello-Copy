@@ -3,22 +3,24 @@
         <div>
             Starred
             <b-list-group horizontal>
-                <p v-for="(starredUserBoard, index) in this.starredUserBoards" :key="index">
-                    <b-list-group-item variant="primary">
-                        <Board :board="starredUserBoard"/>
-                    </b-list-group-item>
-                </p>
+                <b-list-group-item button variant="primary"
+                    v-for="(starredUserBoard, index) in this.starredUserBoards"
+                    :key="index"
+                >
+                    <Board :board="starredUserBoard" />
+                </b-list-group-item>
             </b-list-group>
         </div>
         
         <div class>
             All boards
             <b-list-group horizontal>
-                <p v-for="(userBoard, index) in this.userBoards" :key="index">
-                    <b-list-group-item variant="primary">
-                        <Board :board="userBoard"/>
-                    </b-list-group-item>
-                </p>
+                <b-list-group-item button variant="primary"
+                    v-for="(userBoard, index) in this.userBoards"
+                    :key="index"
+                >
+                    <Board :board="userBoard" />
+                </b-list-group-item>
             </b-list-group>
         </div>
     </div>
