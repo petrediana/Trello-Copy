@@ -5,14 +5,14 @@
         <div>
             Starred
             <p v-for="(starredUserBoard, index) in this.starredUserBoards" :key="index">
-                {{ starredUserBoard }}
+                <Board :board="starredUserBoard"/>
             </p>
         </div>
         
         <div>
             All boards
             <p v-for="(userBoard, index) in this.userBoards" :key="index">
-                {{ userBoard }}
+                <Board :board="userBoard"/>
             </p>
         </div>
     </div>
@@ -20,11 +20,16 @@
 
 <script>
 import BoardStore from '../stores/BoardStore.js'
+import Board from '../components/Board.vue'
 
 export default {
     props: {
         currentUserId: String,
         currentUserName: String
+    },
+
+    components: {
+        Board
     },
 
     data() {
