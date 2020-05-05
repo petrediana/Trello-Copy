@@ -6,7 +6,9 @@
                 :key="index"
                 :header="noteList.name"
             >
-
+                <b-list-group>
+                    <Notes :currentNoteListId="noteList._id"/>
+                </b-list-group>
             </b-card>
         </b-card-group>
     </div>
@@ -14,10 +16,15 @@
 
 <script>
 import NoteListStore from '../stores/NoteListStore.js'
+import Notes from '../components/Notes'
 
 export default {
     props: {
         currentBoardId: String
+    },
+
+    components: {
+        Notes
     },
 
     data() {
