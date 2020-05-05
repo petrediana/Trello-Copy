@@ -1,5 +1,5 @@
 <template>
-    <div class="boards-container">
+    <div class="boards-container" v-if="selectedBoardId === null">
         <div>
             Starred
             <b-list-group horizontal>
@@ -26,11 +26,18 @@
             </b-list-group>
         </div>
     </div>
+
+    <div v-else>
+        <NoteList
+            :currentBoardId="this.selectedBoardId"
+        />
+    </div>
 </template>
 
 <script>
 import BoardStore from '../stores/BoardStore.js'
 import Board from '../components/Board.vue'
+import NoteList from '../components/NoteList.vue'
 
 export default {
     props: {
@@ -39,7 +46,8 @@ export default {
     },
 
     components: {
-        Board
+        Board,
+        NoteList
     },
 
     data() {
@@ -51,7 +59,7 @@ export default {
     },
 
     mounted() {
-        console.log('MainMenu component mounted')
+        //console.log('MainMenu component mounted')
         const boardStore = new BoardStore()
         boardStore.getAllBoardsForUser(this.currentUserId)
         this.userBoards = boardStore.userAllBoardsFromDb
@@ -63,7 +71,7 @@ export default {
     methods: {
         handleListItemClick(board) {
             this.selectedBoardId = board._id
-            console.log('click' + ' ' + board._id)
+            //console.log('click' + ' ' + board._id)
         }
     }
 }

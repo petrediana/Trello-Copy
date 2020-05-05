@@ -11,7 +11,7 @@ class NoteListStore {
             const response = await request.json()
 
             response.forEach(noteList => {
-                this.noteListsFromDb.push({
+                this.boardNoteListFromDb.push({
                     _id: noteList._id,
                     name: noteList.name
                 })
