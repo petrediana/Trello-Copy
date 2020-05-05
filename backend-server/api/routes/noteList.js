@@ -27,8 +27,8 @@ router.get('/', (req, res, next) => {
 router.get('/that-belong-to/:boardId', (req, res, next) => {
     const boardId = req.params.boardId;
 
-    Board.find({ "boardId": boardId })
-    .select('_name description starred boardId')
+    NoteList.find({ "boardId": boardId })
+    .select('_id name boardId')
     .exec()
     .then(docs => {
         console.log('From db: ' + docs);  
