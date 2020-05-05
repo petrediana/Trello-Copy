@@ -1,4 +1,4 @@
-const SERVER = 'localhost:8081/board-api/boards'
+const SERVER = 'http://localhost:8081/board-api/boards'
 
 class BoardStore {
     constructor() {
