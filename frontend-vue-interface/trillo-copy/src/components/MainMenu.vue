@@ -6,6 +6,7 @@
                 <b-list-group-item button variant="primary"
                     v-for="(starredUserBoard, index) in this.starredUserBoards"
                     :key="index"
+                    @click="handleListItemClick(starredUserBoard)"
                 >
                     <Board :board="starredUserBoard" />
                 </b-list-group-item>
@@ -18,6 +19,7 @@
                 <b-list-group-item button variant="primary"
                     v-for="(userBoard, index) in this.userBoards"
                     :key="index"
+                    @click="handleListItemClick(userBoard)"
                 >
                     <Board :board="userBoard" />
                 </b-list-group-item>
@@ -43,7 +45,8 @@ export default {
     data() {
         return {
             userBoards: [],
-            starredUserBoards: []
+            starredUserBoards: [],
+            selectedBoardId: null
         }
     },
 
@@ -55,6 +58,13 @@ export default {
 
         boardStore.getAllStarredBoardsForUser(this.currentUserId)
         this.starredUserBoards = boardStore.userAllStarredBoardsFromDb
+    },
+
+    methods: {
+        handleListItemClick(board) {
+            this.selectedBoardId = board._id
+            console.log('click' + ' ' + board._id)
+        }
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <div class="board-container">
-        <p> {{ board.description }} </p>
+        <p><b>{{ board.description }} </b></p>
     </div>
 </template>
 
