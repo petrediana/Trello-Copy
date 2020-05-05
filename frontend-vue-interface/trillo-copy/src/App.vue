@@ -1,25 +1,15 @@
 <template>
   <div id="app">
-    <Header />
-
-    <b-container class ="bv-example-row">
-      <b-row>
-        <b-col sm="7" offset="3">
-          <Login />
-        </b-col>
-      </b-row>
-    </b-container>
+    <Login/>
   </div>
 </template>
 
 <script>
-import Header from './components/Header.vue'
 import Login from './components/Login.vue'
 
 export default {
   name: 'App',
   components: {
-    Header,
     Login
   }
 }

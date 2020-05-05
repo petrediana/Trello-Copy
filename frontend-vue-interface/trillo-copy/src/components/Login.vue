@@ -25,14 +25,15 @@
         </b-jumbotron>
     </div>
     <div v-else>
-        Hello there {{ this.inputName }}
+        <Header 
+            :userName="this.inputName"
+            :logout="handleLogOut"
+         />
+        
         <MainMenu
             :currentUserId="this.userId"
             :currentUserName="this.inputName"
          />
-         <div>
-             <b-link href="#" @click="handleGoBack()">Log out </b-link>
-         </div>
     </div>
 </template>
 
@@ -40,10 +41,12 @@
 <script>
 import UserStore from '../stores/UserStore.js'
 import MainMenu from '../components/MainMenu.vue'
+import Header from '../components/Header.vue'
 
 export default {
     components: {
-        MainMenu
+        MainMenu,
+        Header
     },
 
     data() {
@@ -82,7 +85,7 @@ export default {
             }
         },
 
-        handleGoBack() {
+        handleLogOut() {
             this.userId = null
         }
     }
