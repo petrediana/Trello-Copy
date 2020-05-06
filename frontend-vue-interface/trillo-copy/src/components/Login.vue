@@ -27,7 +27,10 @@
             </b-jumbotron>
         </div>
         <div v-else>
-            sign up
+            <SignUp
+             :onCancel="handleStopSignUpClick"
+             :onAdd="addUser"
+            />
          </div>
     </div>
     <div v-else>
@@ -48,11 +51,13 @@
 import UserStore from '../stores/UserStore.js'
 import MainMenu from '../components/MainMenu.vue'
 import Header from '../components/Header.vue'
+import SignUp from '../components/SignUp.vue'
 
 export default {
     components: {
         MainMenu,
-        Header
+        Header,
+        SignUp
     },
 
     data() {
@@ -61,20 +66,29 @@ export default {
             inputPass: '',
             allUsers: [],
             userId: null,
-            isCreatingUser: false
+            isCreatingUser: false,
+            userStore: null
         }
     },
 
     mounted() {
-        //console.log('Login component mounted')
-        const userStore = new UserStore()
-        userStore.getUsersFromDb()
-        this.allUsers = userStore.usersFromDb
+        this.userStore = new UserStore()
+        this.userStore.getUsersFromDb()
+        this.allUsers = this.userStore.usersFromDb
     },
 
     methods: {
         handleSignUpClick() {
             this.isCreatingUser = true
+        },
+
+        handleStopSignUpClick() {
+            this.isCreatingUser = false
+        },
+
+        async addUser(newUser) {
+            newUser._id = await this.userStore.addUserToDb(newUser)
+            this.allUsers.push(newUser)
         },
 
         handleLoginClick() {
@@ -99,6 +113,7 @@ export default {
     }
 }
 </script>
+
 <style scoped>
 .btn {
     margin-left: 10px;

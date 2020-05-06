@@ -21,6 +21,23 @@ class UserStore {
             console.warn(err)
         }
     }
+
+    async addUserToDb(user) {
+        try {
+            const request = await fetch(`${SERVER}`, {
+                                method: 'post',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(user)
+                            })
+            const response = await request.json()
+            return response.createdUser._id
+        } catch(err) {
+            console.warn(err)
+            return undefined
+        }
+    }
 }
 
 export default UserStore
