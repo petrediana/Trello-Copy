@@ -39,6 +39,27 @@ class BoardStore {
             console.warn(err)
         }
     }
+
+    async addBoardToDb(board) {
+        try {
+            const request = await fetch(`${SERVER}`, {
+                                method: 'post',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(board)
+                            })
+            const response = await request.json()
+            return response.createdBoard._id
+        } catch(err) {
+            console.warn(err)
+            return undefined
+        }
+    }
+
+    async somefunction() {
+        await console.log("asdf")
+    }
 }
 
 export default BoardStore
