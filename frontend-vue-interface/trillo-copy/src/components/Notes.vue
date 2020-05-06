@@ -19,6 +19,8 @@
                 :action="'update'"
                 :cancel="handleOutsideClick"
                 :noteName="this.noteName"
+                :noteDescription="this.noteDescription"
+                :noteId="this.noteId"
             />
         </div>
 
@@ -28,6 +30,8 @@
                 :action="'add'"
                 :cancel="handleCloseAddingComponent"
                 :noteName="''"
+                :noteDescription="''"
+                :noteId="''"
             />
         </div>
     </div>
@@ -52,6 +56,8 @@ export default {
             notes: [],
             isNoteClicked: false,
             noteName: '',
+            noteDescription: '',
+            noteId: '',
             isAddingNote: false
         }
     },
@@ -66,11 +72,15 @@ export default {
         handleClick(note) {
             this.isNoteClicked = true
             this.noteName = note.name
+            this.noteDescription = note.description
+            this.noteId = note._id
         },
 
         handleOutsideClick() {
             this.isNoteClicked = false
-            console.log(this.isNoteClicked)
+            this.noteName = ''
+            this.noteDescription = ''
+            this.noteId = ''
         },
 
         handleAddNoteClick() {
