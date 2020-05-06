@@ -3,6 +3,7 @@ const SERVER = 'http://localhost:8081/note-api/notes';
 class NoteStore {
     constructor() {
         this.notesOfNoteListFromDb = []
+        this.createdNoteId = []
     }
 
     async getNotesOfANoteListFromDb(noteListId) {
@@ -24,15 +25,19 @@ class NoteStore {
 
     async addNoteToDb(note) {
         try {
-            await fetch(`${SERVER}`, {
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(note)
-            })
+            const request = await fetch(`${SERVER}`, {
+                                method: 'post',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(note)
+                            })
+            const response = await request.json()
+            this.createdNoteId = response.createdNote._id
+            return response.createdNote._id
         } catch(err) {
             console.warn(err)
+            return undefined
         }
     }
 
@@ -41,6 +46,26 @@ class NoteStore {
             await fetch(`${SERVER}/${noteId}`, {
                 method: 'delete'
             })
+        } catch(err) {
+            console.warn(err)
+        }
+    }
+
+    async updateNoteFromDb(noteId, newName, newDescription) {
+        try {
+            const requestBody = [
+                { "propName": "name", "value": newName },
+                { "propName": "description", "value": newDescription }
+            ]
+
+            await fetch(`${SERVER}/${noteId}`, {
+                method: 'patch',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+
         } catch(err) {
             console.warn(err)
         }

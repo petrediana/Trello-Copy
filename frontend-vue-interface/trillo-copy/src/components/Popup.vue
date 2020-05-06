@@ -38,7 +38,8 @@ export default {
         cancel: Function,
         action: String,
         onDelete: Function,
-        onAdd: Function
+        onAdd: Function,
+        onUpdate: Function
     },
 
     computed: {
@@ -73,9 +74,9 @@ export default {
             switch(this.action) {
                 case 'update':
                     console.log('update')
+                    this.updateNoteToDb()
                     break
                 case 'add':
-                    console.log('adding')
                     this.addNoteToDb()
                     break;
                 default:
@@ -85,7 +86,6 @@ export default {
         },
 
         handleDeleteNoteClick(noteId) {
-            console.log('delete this note: ' + noteId)
             this.onDelete(noteId)
             this.cancel()
 
@@ -100,6 +100,10 @@ export default {
                 }
                 this.onAdd(noteToAdd)
             }
+        },
+
+        updateNoteToDb() {
+            this.onUpdate(this.noteId, this.inputName, this.inputDescription)
         }
     }
 }

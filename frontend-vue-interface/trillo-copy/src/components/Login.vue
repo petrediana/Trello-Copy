@@ -1,28 +1,34 @@
 <template>
     <div v-if="userId === null">
-        <b-jumbotron header="Welcome to my Trello copy!" lead="Please login">
-            <b-form-group
-                id="name-input"
-                label-cols-sm="3"
-                label-cols-lg="2"
-                label="Enter your name"
-                label-for="input-horizontal"
-            >
-                <b-form-input v-model="inputName" type="text" name="name-input-txt"></b-form-input>
-            </b-form-group>
+        <div v-if="!isCreatingUser">
+            <b-jumbotron header="Welcome to my Trello copy!" lead="Please login">
+                <b-form-group
+                    id="name-input"
+                    label-cols-sm="3"
+                    label-cols-lg="2"
+                    label="Enter your name"
+                    label-for="input-horizontal"
+                >
+                    <b-form-input v-model="inputName" type="text" name="name-input-txt"></b-form-input>
+                </b-form-group>
 
-            <b-form-group true
-                id="name-input"
-                label-cols-sm="3"
-                label-cols-lg="2"
-                label="Enter your password"
-                label-for="input-horizontal"
-            >
-                <b-form-input v-model="inputPass" type="password" name="pass-input-txt"></b-form-input>
-            </b-form-group>
+                <b-form-group true
+                    id="name-input"
+                    label-cols-sm="3"
+                    label-cols-lg="2"
+                    label="Enter your password"
+                    label-for="input-horizontal"
+                >
+                    <b-form-input v-model="inputPass" type="password" name="pass-input-txt"></b-form-input>
+                </b-form-group>
 
-            <b-button @click="handleLoginClick()" variant="primary">Login</b-button>
-        </b-jumbotron>
+                <b-button @click="handleLoginClick" variant="primary">Login</b-button>
+                <b-button @click="handleSignUpClick" variant="primary">Sign up</b-button>
+            </b-jumbotron>
+        </div>
+        <div v-else>
+            sign up
+         </div>
     </div>
     <div v-else>
         <Header 
@@ -54,7 +60,8 @@ export default {
             inputName: '',
             inputPass: '',
             allUsers: [],
-            userId: null
+            userId: null,
+            isCreatingUser: false
         }
     },
 
@@ -66,10 +73,11 @@ export default {
     },
 
     methods: {
-        handleLoginClick() {
-            // console.log(this.allUsers.length)
-            // console.log(this.inputName + ' ' + this.inputPass)
+        handleSignUpClick() {
+            this.isCreatingUser = true
+        },
 
+        handleLoginClick() {
             const filteredUser = this.allUsers.filter(user => {
                 if (user.name === this.inputName && user.pass === this.inputPass) {
                     return user
@@ -91,3 +99,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.btn {
+    margin-left: 10px;
+}
+</style>

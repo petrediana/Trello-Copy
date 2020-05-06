@@ -18,6 +18,7 @@
         <div v-if="isNoteClicked">
             <p></p>
             <Popup
+                :onUpdate="updateNote"
                 :onAdd="addNote"
                 :onDelete="deleteNote"
                 :action="'update'"
@@ -32,6 +33,7 @@
         <div v-if="isAddingNote">
             <p></p>
             <Popup
+                :onUpdate="updateNote"
                 :onAdd="addNote"
                 :onDelete="deleteNote"
                 :action="'add'"
@@ -92,10 +94,24 @@ export default {
                 }
             })
         },
-        addNote(note) {
-            this.noteStore.addNoteToDb(note)
+
+        async addNote(note) {
+            note._id = await this.noteStore.addNoteToDb(note)
             this.notes.push(note)
+            
         },
+
+        updateNote(noteId, newName, newDescription) {
+            this.noteStore.updateNoteFromDb(noteId, newName, newDescription)
+            for (let i = 0; i < this.notes.length; ++i) {
+                if (this.notes[i]._id === noteId) {
+                    this.notes[i].name = newName
+                    this.notes[i].description = newDescription
+                    break
+                }
+            }    
+        },
+
         handleClick(note) {
             this.isNoteClicked = true
             this.noteName = note.name
