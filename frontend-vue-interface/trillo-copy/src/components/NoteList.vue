@@ -5,7 +5,7 @@
          </div>
         <b-card-group deck>
             <b-card
-                v-for="(noteList, index) in noteList"
+                v-for="(noteList, index) in computedNoteList"
                 :key="index"
                 :header="noteList.name"
             >
@@ -17,7 +17,8 @@
                 </b-button-group>
                 <p></p> 
                 <b-list-group>
-                    <Notes :currentNoteListId="noteList._id"/>
+                    <Notes
+                    :currentNoteListId="noteList._id"/>
                 </b-list-group>
             </b-card>
         </b-card-group>
@@ -56,9 +57,15 @@ export default {
         }
     },
 
+    computed: {
+        computedNoteList() {
+            return this.noteList
+        }
+    },
+
     mounted() {
         console.log('notelist component mounted')
-        const noteListStore = new NoteListStore();
+        const noteListStore = new NoteListStore()
         noteListStore.getBoardNoteListsFromDb(this.currentBoardId)
         this.noteList = noteListStore.boardNoteListFromDb
     },

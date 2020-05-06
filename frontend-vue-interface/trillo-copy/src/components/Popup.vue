@@ -3,7 +3,7 @@
         <div role="group" class="input-container">
             <b-form-input
             id="input-live"
-            v-model="noteName"
+            v-model="inputName"
             :state="nameState"
             aria-describedby="input-live-help input-live-feedback"
             placeholder="Enter note name"
@@ -16,7 +16,7 @@
 
             <b-form-input
             type="text"
-            v-model="noteDescription"
+            v-model="inputDescription"
             :value="this.noteDescription"
             placeholder="Note's description"
             ></b-form-input>
@@ -24,7 +24,7 @@
         <p> </p>
         <b-button @click="handleCommitClick" variant="success">Commit</b-button>
         <b-button @click="handleDismissClick">Dismiss</b-button>
-        <b-button v-if="canDeleteNote" @click="handleDeleteNoteClick(noteName)" variant="danger">Delete</b-button>
+        <b-button v-if="canDeleteNote" @click="handleDeleteNoteClick(noteId)" variant="danger">Delete</b-button>
     </div>
 </template>
 
@@ -34,13 +34,17 @@ export default {
         noteName: String,
         noteDescription: String,
         noteId: String,
+        currentNoteListId: String,
         cancel: Function,
-        action: String
+        action: String,
+        onDelete: Function,
+        onAdd: Function,
+        onTrigger: Function
     },
 
     computed: {
         nameState() {
-            return this.noteName.trim().length > 0 ? true : false
+            return this.inputName.trim().length > 0 ? true : false
       }
     },
 
@@ -48,13 +52,16 @@ export default {
         if (this.action === 'update') {
             this.canDeleteNote = true;
         }
-
-        console.log(this.noteName + ' ' + this.noteDescription + ' ' + this.noteId)
+        this.inputName = this.noteName
+        this.inputDescription = this.noteDescription
+        //console.log(this.currentNoteListId + ' ' + this.noteName + ' ' + this.noteDescription + ' ' + this.noteId)
     },
 
     data() {
         return {
-            canDeleteNote: false
+            canDeleteNote: false,
+            inputName: '',
+            inputDescription: ''
         }
     },
 
@@ -70,6 +77,7 @@ export default {
                     break
                 case 'add':
                     console.log('adding')
+                    this.addNoteToDb()
                     break;
                 default:
                     break;
@@ -77,9 +85,23 @@ export default {
             this.cancel();
         },
 
-        handleDeleteNoteClick(note) {
-            console.log('delete this note: ' + note)
+        handleDeleteNoteClick(noteId) {
+            console.log('delete this note: ' + noteId)
+            this.onDelete(noteId)
             this.cancel()
+
+            this.onTrigger()
+        },
+
+        addNoteToDb() {
+            if (this.inputName.trim().length > 0) {
+                const noteToAdd = {
+                    name: this.inputName,
+                    description: this.inputDescription,
+                    noteListId: this.currentNoteListId
+                }
+                this.onAdd(noteToAdd)
+            }
         }
     }
 }

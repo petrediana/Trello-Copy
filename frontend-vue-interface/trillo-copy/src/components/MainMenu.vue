@@ -17,7 +17,7 @@
             All boards
             <b-list-group horizontal>
                 <b-list-group-item button variant="primary"
-                    v-for="(userBoard, index) in this.userBoards"
+                    v-for="(userBoard, index) in computedUserBoards"
                     :key="index"
                     @click="handleListItemClick(userBoard)"
                 >
@@ -58,6 +58,12 @@ export default {
             starredUserBoards: [],
             selectedBoardId: null,
             selectedBoardName: null
+        }
+    },
+
+    computed: {
+        computedUserBoards() {
+            return this.userBoards
         }
     },
 

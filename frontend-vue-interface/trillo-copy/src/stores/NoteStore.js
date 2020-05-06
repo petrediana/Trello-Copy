@@ -21,6 +21,30 @@ class NoteStore {
             console.warn(err)
         }
     }
+
+    async addNoteToDb(note) {
+        try {
+            await fetch(`${SERVER}`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(note)
+            })
+        } catch(err) {
+            console.warn(err)
+        }
+    }
+
+    async deleteNoteFromDb(noteId) {
+        try {
+            await fetch(`${SERVER}/${noteId}`, {
+                method: 'delete'
+            })
+        } catch(err) {
+            console.warn(err)
+        }
+    }
 }
 
 export default NoteStore
