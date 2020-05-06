@@ -13,8 +13,7 @@
                     {{ currentBoardName }}:
                 </p>
                 <b-button-group size="sm">
-                    <b-button @click="handleClickAddNote" variant="success">Add Note</b-button>
-                    <b-button variant="danger">Delete notes</b-button>
+                    <b-button variant="danger">Delete list</b-button>
                 </b-button-group>
                 <p></p> 
                 <b-list-group>

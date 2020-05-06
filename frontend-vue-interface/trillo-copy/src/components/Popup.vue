@@ -18,7 +18,8 @@
             <b-form-input  type="text" placeholder="Note's description"></b-form-input>
         </div>
         <p> </p>
-        <b-button @click="handleClick()" variant="success">Ok</b-button>
+        <b-button variant="success">Commit</b-button>
+        <b-button @click="handleDismissClick">Dismiss</b-button>
     </div>
 </template>
 
@@ -26,7 +27,8 @@
 export default {
     props: {
         noteName: String,
-        cancel: Function
+        cancel: Function,
+        action: String
     },
 
     computed: {
@@ -42,8 +44,7 @@ export default {
     },
 
     methods: {
-        handleClick() {
-            console.log('click')
+        handleDismissClick() {
             this.cancel()
         }
     }
@@ -51,4 +52,7 @@ export default {
 </script>
 
 <style scoped>
+.btn {
+    margin-left: 2px;
+}
 </style>
