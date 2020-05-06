@@ -18,7 +18,6 @@
         <div v-if="isNoteClicked">
             <p></p>
             <Popup
-                :onTrigger="triggerRender"
                 :onAdd="addNote"
                 :onDelete="deleteNote"
                 :action="'update'"
@@ -33,7 +32,6 @@
         <div v-if="isAddingNote">
             <p></p>
             <Popup
-                :onTrigger="triggerRender"
                 :onAdd="addNote"
                 :onDelete="deleteNote"
                 :action="'add'"

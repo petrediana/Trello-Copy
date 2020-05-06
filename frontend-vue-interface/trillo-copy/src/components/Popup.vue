@@ -38,8 +38,7 @@ export default {
         cancel: Function,
         action: String,
         onDelete: Function,
-        onAdd: Function,
-        onTrigger: Function
+        onAdd: Function
     },
 
     computed: {
@@ -90,7 +89,6 @@ export default {
             this.onDelete(noteId)
             this.cancel()
 
-            this.onTrigger()
         },
 
         addNoteToDb() {
