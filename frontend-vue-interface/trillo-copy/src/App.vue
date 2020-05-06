@@ -1,7 +1,8 @@
 <template>
   <div class="app">
-    <Login/>
-
+    <div class="app-container">
+      <Login/>
+    </div>
     <p class="bottom-right"> Created by Petre Diana</p>
   </div>
 </template>
@@ -32,5 +33,10 @@ export default {
   bottom: 0;
   right: 0;
   margin-right: 10px;
+}
+
+.app-container {
+  margin-left: 15px;
+  margin-right: 15px;
 }
 </style>
