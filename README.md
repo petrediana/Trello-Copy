@@ -1,5 +1,18 @@
 # Vue Trello-Copy
 
+## How to:
+  - run npm install for the frontend and backend component in their specific folders
+  - to start the server api you need to run **npm start** in the backend folder
+  - to start the frontend server you need to run **npm run serve** in the trello-copy folder
+  - the servers are running on localhost ports 8080 and 8081
+
+## How it works:
+  - an instance of a http server is deployed on port 8081
+  - the api can connect to a mongodb atlas cloud instance to access the data tables
+  - for each db table were defined get, post, put and delete endpoints
+  - the vue app uses the api server to extract and use the data
+  - different components manage, display and manipulate that data
+
 ## Available components:
   - Login
   - Sign up
@@ -18,7 +31,6 @@
 ## Implementation:
   - RESTful api backend server
   - single web application frontend
-  
  
 ## Tehnologies and some of the used tools:
   - [Vue.js framework](https://vuejs.org/)
