@@ -2,7 +2,6 @@
     <div class="header-container">
         <b-nav tabs>
             <b-nav-item disabled><b>Trello copy :)</b></b-nav-item>
-            <b-nav-item disabled>ToDo: maybe change this</b-nav-item>
             
             <b-navbar-nav class="ml-auto">
                 <b-nav-item-dropdown right>
