@@ -20,7 +20,10 @@
 export default {
     props: {
         boardId: String,
-        onAdd: Function
+        onAdd: Function,
+        listName: String,
+        listId: String,
+        onUpdate:Function
     },
 
     data() {
@@ -35,15 +38,32 @@ export default {
       }
     },
 
+    mounted() {
+        console.log(this.inputName)
+        console.log(this.listName)
+        if (this.listName !== undefined) {
+            this.inputName = this.listName
+        }
+    },
+
     methods: {
         submitNoteList() {
-            if (event.key == "Enter") {
-                if (this.inputName.trim().length > 0) {
-                    this.onAdd({
-                        "name": this.inputName,
-                        "boardId": this.boardId
-                    })
-                    this.inputName = ''
+            if (this.listName === undefined) {
+                if (event.key == "Enter") {
+                    if (this.inputName.trim().length > 0) {
+                        this.onAdd({
+                            "name": this.inputName,
+                            "boardId": this.boardId
+                        })
+                        this.inputName = ''
+                    }
+                }
+            } else {
+                if (event.key == "Enter"){
+                    if (this.inputName.trim().length > 0) {
+                        this.onUpdate(this.listId, this.inputName)
+                        this.inputName = ''
+                    }
                 }
             }
         }

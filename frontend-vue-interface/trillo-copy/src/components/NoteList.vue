@@ -3,12 +3,20 @@
         <div>
              <b-link href="#" @click="handleGoBack()">Go back...</b-link>
          </div>
-         <div>
+         <div v-if="listNameForUpdate === null">
              <AddNoteList
-             :boardId="currentBoardId"
-             :onAdd="addNoteList"
+              :boardId="currentBoardId"
+              :onAdd="addNoteList"
              />   
-         </div>
+        </div>
+        <div v-else>
+            {{ this.listNameForUpdate }}
+            <AddNoteList
+             :listName="listNameForUpdate"
+             :listId="listIdForUpdate"
+             :onUpdate="updateNoteList"
+            />
+        </div>
         <b-card-group deck>
             <b-card
                 v-for="(noteList, index) in computedNoteList"
@@ -20,6 +28,7 @@
                 </p>
                 <b-button-group size="sm">
                     <b-button @click="deleteNoteList(noteList._id)" variant="danger">Delete list</b-button>
+                    <b-button @click="triggerUpdate(noteList)">Update list</b-button>
                 </b-button-group>
                 <p></p> 
                 <b-list-group>
@@ -62,7 +71,9 @@ export default {
         return {
             noteList: [],
             isAddingNotes: false,
-            noteListStore: null
+            noteListStore: null,
+            listIdForUpdate: null,
+            listNameForUpdate: null
         }
     },
 
@@ -93,6 +104,25 @@ export default {
             })
         },
 
+        triggerUpdate(list) {
+            this.listIdForUpdate = list._id
+            this.listNameForUpdate = list.name
+            console.log(this.listNameForUpdate)
+        },
+
+        updateNoteList(listId, newName) {
+            this.noteListStore.updateNoteListFromDb(listId, newName)
+            for (let i = 0; i < this.noteList.length; ++i) {
+                if (String(this.noteList[i]._id) === String(listId)) {
+                    this.noteList[i].name = newName
+                    break
+                }
+            }
+
+            this.listIdForUpdate = ''
+            this.listNameForUpdate = ''
+        },
+
         handleGoBack() {
             this.cancel()
         },
@@ -107,3 +137,6 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+</style>

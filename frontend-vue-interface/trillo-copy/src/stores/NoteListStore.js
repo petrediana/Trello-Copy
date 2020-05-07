@@ -48,6 +48,25 @@ class NoteListStore {
             console.warn(err)
         }
     }
+
+    async updateNoteListFromDb(noteListId, newName) {
+        try {
+            const requestBody = [
+                { "propName": "name", "value": newName }
+            ]
+
+            await fetch(`${SERVER}/${noteListId}`, {
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+
+        } catch(err) {
+            console.warn(err)
+        }
+    }
 }
 
 export default NoteListStore
