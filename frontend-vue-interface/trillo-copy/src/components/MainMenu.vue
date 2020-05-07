@@ -1,18 +1,5 @@
 <template>
-    <div class="boards-container" v-if="selectedBoardId === null">
-        <div>
-            Starred
-            <b-list-group horizontal>
-                <b-list-group-item button variant="primary"
-                    v-for="(starredUserBoard, index) in this.starredUserBoards"
-                    :key="index"
-                    @click="handleListItemClick(starredUserBoard)"
-                >
-                    <Board :board="starredUserBoard" />
-                </b-list-group-item>
-            </b-list-group>
-        </div>
-        
+    <div class="boards-container" v-if="selectedBoardId === null">        
         <div class>
             All boards
             <b-list-group horizontal>
@@ -45,6 +32,7 @@
             :board="boardForUpdate"
             :onUpdate="updateBoard"
             />
+            <b-button @click="handleDismissUpdateButton">Dismiss</b-button>
         </div>
     </div>
 
@@ -98,9 +86,6 @@ export default {
         this.boardStore = new BoardStore()
         this.boardStore.getAllBoardsForUser(this.currentUserId)
         this.userBoards = this.boardStore.userAllBoardsFromDb
-
-        this.boardStore.getAllStarredBoardsForUser(this.currentUserId)
-        this.starredUserBoards = this.boardStore.userAllStarredBoardsFromDb
     },
 
     methods: {
@@ -128,6 +113,11 @@ export default {
                 }
             }
 
+            this.isUpdating = false
+            this.boardForUpdate = null
+        },
+
+        handleDismissUpdateButton() {
             this.isUpdating = false
             this.boardForUpdate = null
         },
