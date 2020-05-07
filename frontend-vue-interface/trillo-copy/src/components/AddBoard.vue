@@ -1,18 +1,16 @@
 <template>
     <div class="component-container">
         <b-form-input
-            id="input-live"
             v-model="inputName"
-            :state="nameState"
-            aria-describedby="input-live-help input-live-feedback"
             placeholder="Enter board name"
             trim
             @keyup="submitBoard"
             ></b-form-input>
+        
+        <p v-if="isErrorDisplayed">
+            invalid name
+         </p>
 
-            <b-form-invalid-feedback id="input-live-feedback">
-            Name can't be empty!
-            </b-form-invalid-feedback>
     </div>
 </template>
 
@@ -27,7 +25,8 @@ export default {
 
     data() {
         return {
-            inputName: ''
+            inputName: '',
+            isErrorDisplayed: false
         }
     },
 
@@ -53,14 +52,20 @@ export default {
                             "userId": this.currentUserId
                         })
                         this.inputName = ''
+                        this.isErrorDisplayed = false
+                    } else {
+                        this.isErrorDisplayed = true
                     }
                 }
             } else {
                 if (event.key == "Enter") {
                     if (this.inputName.trim().length > 0) {
                         this.onUpdate(this.board._id, this.inputName)
-                    }
-                    this.inputName = ''
+                        this.inputName = ''
+                        this.isErrorDisplayed = false
+                    } else {
+                        this.isErrorDisplayed = true
+                    }                    
                 }
             }
         }
@@ -69,8 +74,13 @@ export default {
 </script>
 
 <style scoped>
-.component-container {
-    padding: 10px;
-    margin-bottom: 10px;
-}
+    .component-container {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .component-container > p {
+        margin-top: 10px;
+        color: red;
+    }
 </style>
