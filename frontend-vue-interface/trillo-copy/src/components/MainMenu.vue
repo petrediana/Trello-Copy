@@ -19,9 +19,10 @@
                 <b-list-group-item button variant="primary"
                     v-for="(userBoard, index) in computedUserBoards"
                     :key="index"
-                    @click="handleListItemClick(userBoard)"
                 >
-                    <Board :board="userBoard" />
+                    <Board 
+                    :onSelect="handleListItemClick"
+                    :board="userBoard" />
                 </b-list-group-item>
             </b-list-group>
         </div>
