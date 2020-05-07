@@ -1,18 +1,15 @@
 <template>
     <div class="component-container">
         <b-form-input
-            id="input-live"
             v-model="inputName"
-            :state="nameState"
-            aria-describedby="input-live-help input-live-feedback"
             placeholder="Add list..."
             trim
             @keyup="submitNoteList"
             ></b-form-input>
-
-            <b-form-invalid-feedback id="input-live-feedback-notelist">
-            Name can't be empty!
-            </b-form-invalid-feedback>
+        
+        <p v-if="isErrorDisplayed">
+            invalid name
+        </p>
     </div>
 </template>
 
@@ -28,7 +25,8 @@ export default {
 
     data() {
         return {
-            inputName: ''
+            inputName: '',
+            isErrorDisplayed: false
         }
     },
 
@@ -44,7 +42,7 @@ export default {
 
     methods: {
         submitNoteList() {
-            if (this.listName === undefined) {
+            if (this.listName === '') {
                 if (event.key == "Enter") {
                     if (this.inputName.trim().length > 0) {
                         this.onAdd({
@@ -52,14 +50,20 @@ export default {
                             "boardId": this.boardId
                         })
                         this.inputName = ''
-                    }
+                        this.isErrorDisplayed = false
+                    } else {
+                        this.isErrorDisplayed = true
+                    } 
                 }
             } else {
                 if (event.key == "Enter"){
                     if (this.inputName.trim().length > 0) {
                         this.onUpdate(this.listId, this.inputName)
                         this.inputName = ''
-                    }
+                        this.isErrorDisplayed = false
+                    } else {
+                        this.isErrorDisplayed = true
+                    } 
                 }
             }
         }
@@ -68,8 +72,13 @@ export default {
 </script>
 
 <style scoped>
-.component-container {
-    padding: 10px;
-    margin-bottom: 10px;
-}
+    .component-container {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .component-container > p {
+        margin-top: 10px;
+        color: red;
+    }
 </style>
