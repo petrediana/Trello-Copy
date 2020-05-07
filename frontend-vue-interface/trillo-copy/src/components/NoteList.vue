@@ -142,6 +142,8 @@ export default {
 
 <style scoped>
     .update-notelist-container {
-        max-width: 500px;
+        width: 50%;
+        margin: auto;
+        padding: 10px;
     }
 </style>
