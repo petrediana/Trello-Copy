@@ -103,7 +103,7 @@ router.delete('/:boardId', (req, res, next) => {
     })
 });
 
-router.patch('/:boardId', (req, res, next) => {
+router.put('/:boardId', (req, res, next) => {
     const boardIdToUpdate = req.params.boardId;
     const updateOps = {}; 
     for (const ops of req.body) {

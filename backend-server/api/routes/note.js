@@ -103,7 +103,7 @@ router.delete('/:noteId', (req, res, next) => {
     });
 });
 
-router.patch('/:noteId', (req, res, next) => {
+router.put('/:noteId', (req, res, next) => {
     const noteIdToUpdate = req.params.noteId;
     const updateOps = {}; 
     for (const ops of req.body) {

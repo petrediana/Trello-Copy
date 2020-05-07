@@ -59,7 +59,7 @@ class NoteStore {
             ]
 
             await fetch(`${SERVER}/${noteId}`, {
-                method: 'patch',
+                method: 'put',
                 headers: {
                     'Content-Type': 'application/json'
                 },

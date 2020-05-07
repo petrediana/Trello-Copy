@@ -74,7 +74,7 @@ class BoardStore {
             ]
 
             await fetch(`${SERVER}/${boardId}`, {
-                method: 'patch',
+                method: 'put',
                 headers: {
                     'Content-Type': 'application/json'
                 },
