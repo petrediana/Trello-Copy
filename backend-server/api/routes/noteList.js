@@ -101,7 +101,7 @@ router.delete('/:noteListId', (req, res, next) => {
     })
 });
 
-router.patch('/:noteListId', (req, res, next) => {
+router.put('/:noteListId', (req, res, next) => {
     const noteListIdToUpdate = req.params.noteListId;
     const updateOps = {}; 
     for (const ops of req.body) {

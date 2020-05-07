@@ -5,17 +5,19 @@
          </div>
          <div v-if="listNameForUpdate === null">
              <AddNoteList
+              :listName="''"
               :boardId="currentBoardId"
               :onAdd="addNoteList"
              />   
         </div>
-        <div v-else>
-            {{ this.listNameForUpdate }}
+        <div v-else class="update-notelist-container">
+            <b-container>
             <AddNoteList
              :listName="listNameForUpdate"
              :listId="listIdForUpdate"
              :onUpdate="updateNoteList"
             />
+            </b-container>
         </div>
         <b-card-group deck>
             <b-card
@@ -120,7 +122,7 @@ export default {
             }
 
             this.listIdForUpdate = ''
-            this.listNameForUpdate = ''
+            this.listNameForUpdate = null
         },
 
         handleGoBack() {
@@ -139,4 +141,7 @@ export default {
 </script>
 
 <style scoped>
+    .update-notelist-container {
+        max-width: 500px;
+    }
 </style>

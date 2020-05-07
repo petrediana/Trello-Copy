@@ -39,11 +39,7 @@ export default {
     },
 
     mounted() {
-        console.log(this.inputName)
-        console.log(this.listName)
-        if (this.listName !== undefined) {
-            this.inputName = this.listName
-        }
+        this.inputName = this.listName
     },
 
     methods: {
