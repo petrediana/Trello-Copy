@@ -57,8 +57,14 @@ class BoardStore {
         }
     }
 
-    async somefunction() {
-        await console.log("asdf")
+    async deleteBoardFromDb(boardId) {
+        try {
+            await fetch(`${SERVER}/${boardId}`, {
+                method: 'delete'
+            })
+        } catch(err) {
+            console.warn(err)
+        }
     }
 }
 

@@ -20,9 +20,10 @@
                     v-for="(userBoard, index) in computedUserBoards"
                     :key="index"
                 >
-                    <Board 
+                    <Board
+                    :board="userBoard"
                     :onSelect="handleListItemClick"
-                    :board="userBoard" />
+                    :onDelete="deleteBoard" />
                 </b-list-group-item>
             </b-list-group>
         </div>
@@ -93,6 +94,15 @@ export default {
         async addBoard(board) {
             board._id = await this.boardStore.addBoardToDb(board)
             this.userBoards.push(board)
+        },
+
+        deleteBoard(boardId) {
+            this.boardStore.deleteBoardFromDb(boardId)
+            this.userBoards = this.userBoards.filter(board => {
+                if (String(board._id) !== String(boardId)) {
+                    return board
+                }
+            })
         },
 
         handleListItemClick(board) {

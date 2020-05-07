@@ -5,7 +5,7 @@
             <b-button-group size="sm" vertical>
                 <b-button>Update</b-button>
                 <b-button @click="selectBoard" variant="success">Select</b-button>
-                <b-button variant="danger">Delete</b-button>
+                <b-button @click="deleteBoard" variant="danger">Delete</b-button>
             </b-button-group>
         </div>
     </div>
@@ -15,7 +15,8 @@
 export default {
     props: {
         board: Object,
-        onSelect: Function
+        onSelect: Function,
+        onDelete: Function
     },
 
     data() {
@@ -27,6 +28,10 @@ export default {
     methods: {
         selectBoard() {
             this.onSelect(this.board)
+        },
+
+        deleteBoard() {
+            this.onDelete(this.board._id)
         }
     }
 }
