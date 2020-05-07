@@ -38,6 +38,16 @@ class NoteListStore {
             return undefined
         }
     }
+
+    async deleteNoteListFromDb(noteListId) {
+        try {
+            await fetch(`${SERVER}/${noteListId}`, {
+                method: 'delete'
+            })
+        } catch(err) {
+            console.warn(err)
+        }
+    }
 }
 
 export default NoteListStore

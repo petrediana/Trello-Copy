@@ -19,7 +19,7 @@
                     {{ currentBoardName }}:
                 </p>
                 <b-button-group size="sm">
-                    <b-button variant="danger">Delete list</b-button>
+                    <b-button @click="deleteNoteList(noteList._id)" variant="danger">Delete list</b-button>
                 </b-button-group>
                 <p></p> 
                 <b-list-group>
@@ -84,8 +84,13 @@ export default {
             this.noteList.push(list)
         },
 
-        deleteNoteList() {
-
+        deleteNoteList(noteListId) {
+            this.noteListStore.deleteNoteListFromDb(noteListId)
+            this.noteList = this.noteList.filter(list => {
+                if (String(list._id) !== String(noteListId)) {
+                    return list
+                }
+            })
         },
 
         handleGoBack() {
