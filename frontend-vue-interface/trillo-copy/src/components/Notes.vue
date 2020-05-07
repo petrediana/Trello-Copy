@@ -139,7 +139,7 @@ export default {
 </script>
 
 <style scoped>
-.description-container {
-    font-style: italic;
-}
+    .description-container {
+        font-style: italic;
+    }
 </style>

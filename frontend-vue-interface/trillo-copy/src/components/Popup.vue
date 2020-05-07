@@ -110,7 +110,7 @@ export default {
 </script>
 
 <style scoped>
-.btn {
-    margin-left: 2px;
-}
+    .btn {
+        margin-left: 2px;
+    }
 </style>
