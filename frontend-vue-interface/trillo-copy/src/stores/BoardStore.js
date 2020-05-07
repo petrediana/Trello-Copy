@@ -66,6 +66,25 @@ class BoardStore {
             console.warn(err)
         }
     }
+
+    async updateBoardFromDb(boardId, newDescription) {
+        try {
+            const requestBody = [
+                { "propName": "description", "value": newDescription }
+            ]
+
+            await fetch(`${SERVER}/${boardId}`, {
+                method: 'patch',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+
+        } catch(err) {
+            console.warn(err)
+        }
+    }
 }
 
 export default BoardStore

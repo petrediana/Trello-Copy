@@ -5,7 +5,7 @@
             v-model="inputName"
             :state="nameState"
             aria-describedby="input-live-help input-live-feedback"
-            placeholder="Enter note name"
+            placeholder="Enter board name"
             trim
             @keyup="submitBoard"
             ></b-form-input>
@@ -20,12 +20,20 @@
 export default {
     props: {
         onAdd: Function,
-        currentUserId: String
+        currentUserId: String,
+        board: Object,
+        onUpdate: Function
     },
 
     data() {
         return {
             inputName: ''
+        }
+    },
+
+    mounted() {
+        if (this.board !== undefined) {
+            this.inputName = this.board.description
         }
     },
 
@@ -37,12 +45,21 @@ export default {
 
     methods: {
         submitBoard() {
-            if (event.key == "Enter") {
-                if (this.inputName.trim().length > 0) {
-                    this.onAdd({
-                        "description": this.inputName,
-                        "userId": this.currentUserId
-                    })
+            if (String(this.currentUserId) !== 'update') {
+                if (event.key == "Enter") {
+                    if (this.inputName.trim().length > 0) {
+                        this.onAdd({
+                            "description": this.inputName,
+                            "userId": this.currentUserId
+                        })
+                        this.inputName = ''
+                    }
+                }
+            } else {
+                if (event.key == "Enter") {
+                    if (this.inputName.trim().length > 0) {
+                        this.onUpdate(this.board._id, this.inputName)
+                    }
                     this.inputName = ''
                 }
             }

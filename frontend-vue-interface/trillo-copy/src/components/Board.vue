@@ -3,7 +3,7 @@
         <b>{{ board.description }}</b>
         <div class="mt-3">
             <b-button-group size="sm" vertical>
-                <b-button>Update</b-button>
+                <b-button @click="triggerUpdateInput">Update</b-button>
                 <b-button @click="selectBoard" variant="success">Select</b-button>
                 <b-button @click="deleteBoard" variant="danger">Delete</b-button>
             </b-button-group>
@@ -16,7 +16,8 @@ export default {
     props: {
         board: Object,
         onSelect: Function,
-        onDelete: Function
+        onDelete: Function,
+        onUpdate: Function
     },
 
     data() {
@@ -32,6 +33,10 @@ export default {
 
         deleteBoard() {
             this.onDelete(this.board._id)
+        },
+
+        triggerUpdateInput() {
+            this.onUpdate(this.board)
         }
     }
 }

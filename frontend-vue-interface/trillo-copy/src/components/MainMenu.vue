@@ -23,16 +23,27 @@
                     <Board
                     :board="userBoard"
                     :onSelect="handleListItemClick"
-                    :onDelete="deleteBoard" />
+                    :onDelete="deleteBoard"
+                    :onUpdate="handleUpdateBoardButton" />
                 </b-list-group-item>
             </b-list-group>
         </div>
 
-        <div class="add-board-container">
+        <div 
+        v-if="!isUpdating"
+        class="add-board-container">
             Press enter to create a new board!
             <AddBoard
             :currentUserId="currentUserId"
             :onAdd="addBoard"
+            />
+        </div>
+        <div v-else>
+            Press enter to change board's name!
+            <AddBoard
+            :currentUserId="'update'"
+            :board="boardForUpdate"
+            :onUpdate="updateBoard"
             />
         </div>
     </div>
@@ -70,7 +81,9 @@ export default {
             starredUserBoards: [],
             selectedBoardId: null,
             selectedBoardName: null,
-            boardStore: null
+            boardStore: null,
+            isUpdating: false,
+            boardForUpdate: null
         }
     },
 
@@ -103,6 +116,25 @@ export default {
                     return board
                 }
             })
+        },
+
+        updateBoard(boardId, newDescription) {
+            this.boardStore.updateBoardFromDb(boardId, newDescription);
+            console.log(boardId + ' ' + newDescription)
+            for (let i = 0; i < this.userBoards.length; ++i) {
+                if (String(this.userBoards[i]._id) === String(boardId)) {
+                    this.userBoards[i].description = newDescription
+                    break
+                }
+            }
+
+            this.isUpdating = false
+            this.boardForUpdate = null
+        },
+        
+        handleUpdateBoardButton(board) {
+            this.isUpdating = true
+            this.boardForUpdate = board
         },
 
         handleListItemClick(board) {
