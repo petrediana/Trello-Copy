@@ -20,6 +20,24 @@ class NoteListStore {
             console.warn(err);
         }
     }
+
+    async addNoteListToDb(noteList) {
+        try {
+            const request = await fetch(`${SERVER}`, {
+                                method: 'post',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(noteList)
+                            })
+            const response = await request.json()
+            this.createdNoteId = response.createdNote._id
+            return response.createdNoteList._id
+        } catch(err) {
+            console.warn(err)
+            return undefined
+        }
+    }
 }
 
 export default NoteListStore

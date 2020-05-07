@@ -3,6 +3,9 @@
         <div>
              <b-link href="#" @click="handleGoBack()">Go back...</b-link>
          </div>
+         <div>
+             <AddNoteList/>   
+         </div>
         <b-card-group deck>
             <b-card
                 v-for="(noteList, index) in computedNoteList"
@@ -37,6 +40,7 @@
 import NoteListStore from '../stores/NoteListStore.js'
 import Notes from '../components/Notes.vue'
 import Popup from '../components/Popup.vue'
+import AddNoteList from '../components/AddNoteList.vue'
 
 export default {
     props: {
@@ -47,13 +51,15 @@ export default {
 
     components: {
         Notes,
-        Popup
+        Popup,
+        AddNoteList
     },
 
     data() {
         return {
             noteList: [],
-            isAddingNotes: false
+            isAddingNotes: false,
+            noteListStore: null
         }
     },
 
@@ -64,10 +70,9 @@ export default {
     },
 
     mounted() {
-        console.log('notelist component mounted')
-        const noteListStore = new NoteListStore()
-        noteListStore.getBoardNoteListsFromDb(this.currentBoardId)
-        this.noteList = noteListStore.boardNoteListFromDb
+        this.noteListStore = new NoteListStore()
+        this.noteListStore.getBoardNoteListsFromDb(this.currentBoardId)
+        this.noteList = this.noteListStore.boardNoteListFromDb
     },
 
     methods: {

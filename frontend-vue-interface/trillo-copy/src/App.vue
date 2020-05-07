@@ -33,6 +33,7 @@ export default {
   bottom: 0;
   right: 0;
   margin-right: 10px;
+  opacity: 0.5;
 }
 
 .app-container {
