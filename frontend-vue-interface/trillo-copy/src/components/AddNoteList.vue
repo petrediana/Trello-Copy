@@ -5,12 +5,12 @@
             v-model="inputName"
             :state="nameState"
             aria-describedby="input-live-help input-live-feedback"
-            placeholder="Enter the note-list name"
+            placeholder="Add list..."
             trim
             @keyup="submitNoteList"
             ></b-form-input>
 
-            <b-form-invalid-feedback id="input-live-feedback">
+            <b-form-invalid-feedback id="input-live-feedback-notelist">
             Name can't be empty!
             </b-form-invalid-feedback>
     </div>
@@ -19,7 +19,7 @@
 <script>
 export default {
     props: {
-
+        onAdd: Function
     },
 
     data() {
@@ -39,7 +39,9 @@ export default {
             if (String(this.currentUserId) !== 'update') {
                 if (event.key == "Enter") {
                     if (this.inputName.trim().length > 0) {
-                        
+                        this.onAdd({
+                            "name": this.inputName
+                        })
                         this.inputName = ''
                     }
                 }

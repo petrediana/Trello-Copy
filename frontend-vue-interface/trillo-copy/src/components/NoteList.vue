@@ -4,7 +4,9 @@
              <b-link href="#" @click="handleGoBack()">Go back...</b-link>
          </div>
          <div>
-             <AddNoteList/>   
+             <AddNoteList
+             :onAdd="addNoteList"
+             />   
          </div>
         <b-card-group deck>
             <b-card
@@ -76,6 +78,11 @@ export default {
     },
 
     methods: {
+        async addNoteList(list) {
+            list._id = await this.noteListStore.addNoteListToDb(list)
+            this.noteList.push(list)
+        },
+
         handleGoBack() {
             this.cancel()
         },
