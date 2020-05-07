@@ -25,7 +25,10 @@
             :onAdd="addBoard"
             />
         </div>
-        <div v-else>
+        <div 
+        v-else
+        class="update-board-container"
+        >
             Press enter to change board's name!
             <AddBoard
             :currentUserId="'update'"
@@ -140,11 +143,16 @@ export default {
 </script>
 
 <style>
-.add-board-container {
-    position: absolute;                  
-    bottom: 0;                          
-    left: 0;
-    margin-left: 10px;
-    font-style: italic;
-}
+    .add-board-container {
+        position: absolute;                  
+        bottom: 0;                          
+        left: 0;
+        margin-left: 10px;
+        font-style: italic;
+    }
+
+    .update-board-container {
+        margin-top: 10px;
+        font-style: italic;
+    }
 </style>
