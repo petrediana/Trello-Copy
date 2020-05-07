@@ -19,6 +19,7 @@
 <script>
 export default {
     props: {
+        boardId: String,
         onAdd: Function
     },
 
@@ -36,14 +37,13 @@ export default {
 
     methods: {
         submitNoteList() {
-            if (String(this.currentUserId) !== 'update') {
-                if (event.key == "Enter") {
-                    if (this.inputName.trim().length > 0) {
-                        this.onAdd({
-                            "name": this.inputName
-                        })
-                        this.inputName = ''
-                    }
+            if (event.key == "Enter") {
+                if (this.inputName.trim().length > 0) {
+                    this.onAdd({
+                        "name": this.inputName,
+                        "boardId": this.boardId
+                    })
+                    this.inputName = ''
                 }
             }
         }

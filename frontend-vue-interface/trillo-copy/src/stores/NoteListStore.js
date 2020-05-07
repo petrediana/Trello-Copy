@@ -31,7 +31,7 @@ class NoteListStore {
                                 body: JSON.stringify(noteList)
                             })
             const response = await request.json()
-            this.createdNoteId = response.createdNote._id
+            this.createdNoteId = response.createdNoteList._id
             return response.createdNoteList._id
         } catch(err) {
             console.warn(err)

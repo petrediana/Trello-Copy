@@ -5,6 +5,7 @@
          </div>
          <div>
              <AddNoteList
+             :boardId="currentBoardId"
              :onAdd="addNoteList"
              />   
          </div>
@@ -81,6 +82,10 @@ export default {
         async addNoteList(list) {
             list._id = await this.noteListStore.addNoteListToDb(list)
             this.noteList.push(list)
+        },
+
+        deleteNoteList() {
+
         },
 
         handleGoBack() {
