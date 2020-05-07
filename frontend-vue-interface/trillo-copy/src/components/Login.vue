@@ -24,6 +24,10 @@
 
                 <b-button @click="handleLoginClick" variant="primary">Login</b-button>
                 <b-button @click="handleSignUpClick" variant="primary">Sign up</b-button>
+
+                <div v-if="isMessageDisplayed" class="error-message-container">
+                    <b>Name and password do not match</b>
+                </div>
             </b-jumbotron>
         </div>
         <div v-else>
@@ -67,7 +71,8 @@ export default {
             allUsers: [],
             userId: null,
             isCreatingUser: false,
-            userStore: null
+            userStore: null,
+            isMessageDisplayed: false
         }
     },
 
@@ -80,6 +85,7 @@ export default {
     methods: {
         handleSignUpClick() {
             this.isCreatingUser = true
+            this.isMessageDisplayed = false
         },
 
         handleStopSignUpClick() {
@@ -99,11 +105,10 @@ export default {
             })
 
             if (filteredUser.length === 1) {
-                //console.log('user exists')
                 this.userId = filteredUser[0]._id
-                //console.log(this.userId)
+                this.isMessageDisplayed = false
             } else {
-                //console.log('user does not exist')
+                this.isMessageDisplayed = true;
             }
         },
 
@@ -115,7 +120,16 @@ export default {
 </script>
 
 <style scoped>
-.btn {
-    margin-left: 10px;
-}
+    .btn {
+        margin-left: 10px;
+    }
+
+    .error-message-container {
+        margin-top: 10px;
+    }
+
+    .error-message-container > b {
+        margin-top: 10px;
+        color: red;
+    }
 </style>
